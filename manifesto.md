@@ -56,5 +56,35 @@ convenience is king and paying for sites is inconvenient - how do we solve this?
 
 ## The universal subscription for the internet
 
-We solve this by implementing a single subscription for all of the services currently funded by advertisements. You pay a fixed amount
-of money once a month
+We solve this by implementing a single subscription for all of the services currently funded by advertisements. You pay a fixed amount of money once a month and this money
+is distributed to the sites you visit by the number of times you visit them
+and the amount of time you spend on them.
+
+The platform is implemented using private/public key encryption. The basic
+principle is outlined below:
+
+Assume two parties exist:
+- Alice - the owner of the website
+- Bob - The user browsing the website
+
+Alice has a private key P_a and Bob has a private key P_b
+
+Alice downloads the PayForIt library (js, java, swift - depending on platform)
+and implements it into her site.
+
+Bob downloads a PayForIt browser extension or a mobile app.
+
+Let's look at an example where Bob visits Alices website.
+1. Bob pays a $5 subscription which is stored on a smart contract in a public
+blockchain
+2. Alices website provides no content, but server the PayForIt.js script with
+a content unlock request signed with P_a
+3. Bobs browser extension detects the content unlock request and responds with
+Bobs public key, verifying that the subscription has been paid.
+4. The script _and_ the extension start a periodic communication, measuring the
+elapsed time
+5. After the user leaves the site, the browser extension and the script notify
+that the session has ended.
+6. The session length is written in a public blockchain
+7. At the end of the month, all sessions lengths are calculated and funds are
+distributed to content creators. 
